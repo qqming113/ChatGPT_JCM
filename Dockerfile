@@ -1,5 +1,5 @@
 # 设置基础镜像
-FROM node:14-alpine
+FROM node:18-alpine
 
 # 设置工作目录
 WORKDIR /app
@@ -16,6 +16,6 @@ COPY . .
 # 编译应用程序
 RUN npm run build
 
-# 启动Nginx服务
+# 启动服务
 CMD ["npm", "run", "serve"]
 
