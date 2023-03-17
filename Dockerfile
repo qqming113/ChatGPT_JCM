@@ -16,6 +16,15 @@ COPY . .
 # 编译应用程序
 RUN npm run build
 
-# 启动服务
-CMD ["npm", "run", "serve"]
+# 设置nginx为基础镜像
+FROM nginx:alpine
+
+# 将编译后的应用程序复制到nginx默认的静态文件目录中
+COPY --from=0 /app/dist /usr/share/nginx/html
+
+# 暴露端口
+EXPOSE 80
+
+# 启动Nginx服务
+CMD ["nginx", "-g", "daemon off;"]
 
